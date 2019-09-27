@@ -1,17 +1,20 @@
-class ball {
+class Ball {
   //properties
   float xpos;
   int ypos;
-  float xaccel = 200;
-  int yaccel = 0;
+  float xaccel = 0;
+  int yaccel = -10;
+  //variables for switching variables when balls collide
+  float tempx;
+  int tempy;
   //constructor
-  ball() {
-    xpos = 100;
-    ypos = 100;
+  Ball() {
+    xpos = mouseX;
+    ypos = mouseY;
   }
   //methods
   void display() {
-    fill(255, 255, 255);
+    fill(255);
     ellipse(xpos, ypos, 50, 50);
   }
   void move() {
@@ -44,6 +47,20 @@ class ball {
     if (ypos<25) {
       yaccel = yaccel*(-1)-1;
       ypos = 27;
+    }
+    for (Ball ball : balls) {
+      if (dist(ball.xpos, ball.ypos, xpos, ypos)<50) {
+        tempx = ball.xaccel;
+        ball.xaccel = xaccel;
+        xaccel = tempx;
+        tempy = ball.yaccel;
+        ball.yaccel = yaccel;
+        yaccel = tempy;
+        xpos = xpos + 0.5*(xpos-ball.xpos);
+        ball.xpos = ball.xpos + (ball.xpos-xpos);
+        ypos = ypos + int(0.5*(ypos-ball.ypos));
+        ball.ypos = ball.ypos + (ball.ypos-ypos);
+      }
     }
   }
 }

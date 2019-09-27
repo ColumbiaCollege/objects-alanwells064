@@ -1,11 +1,10 @@
-mainball main = new mainball();
-ArrayList<ball> balls = new ArrayList<ball>();
+Mainball main = new Mainball();
+ArrayList<Ball> balls = new ArrayList<Ball>();
 //set canvas size, text size, & color mode
 void setup() {
   size(800, 800);
   textSize(20);
   colorMode(HSB);
-  
 }
 void draw() {
   //draw background every frame
@@ -13,6 +12,11 @@ void draw() {
   main.move();
   main.collide();
   main.display();
+  for (Ball ball : balls) {
+    ball.move();
+    ball.collide();
+    ball.display();
+  }
 }
 //hit the ball in the whatever direction is pressed (MUST CLICK INTO THE WINDOW)
 void keyPressed() {
@@ -33,6 +37,6 @@ void keyPressed() {
 }
 
 
-void mouseClicked(){
-  balls.add(new ball());
+void mouseClicked() {
+  balls.add(new Ball());
 }

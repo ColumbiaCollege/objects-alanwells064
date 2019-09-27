@@ -1,4 +1,4 @@
-class mainball {
+class Mainball {
   //properties
   float xpos;
   int ypos;
@@ -10,8 +10,11 @@ class mainball {
   int collisions = 0;
   //define color variable
   int c = 0;
+  //variables for switching velocities when balls collide
+  float tempx;
+  int tempy;
   //constructor
-  mainball() {
+  Mainball() {
     xpos = 100;
     ypos = 100;
   }
@@ -58,6 +61,20 @@ class mainball {
       ypos = 27;
       collisions++;
       c = int(random(0, 256));
+    }
+    for (Ball ball : balls) {
+      if (dist(ball.xpos, ball.ypos, xpos, ypos)<50) {
+        tempx = ball.xaccel;
+        ball.xaccel = xaccel;
+        xaccel = tempx;
+        tempy = ball.yaccel;
+        ball.yaccel = yaccel;
+        yaccel = tempy;
+        xpos = xpos + 0.5*(xpos-ball.xpos);
+        ball.xpos = ball.xpos + (ball.xpos-xpos);
+        ypos = ypos + int(0.5*(ypos-ball.ypos));
+        ball.ypos = ball.ypos + (ball.ypos-ypos);
+      }
     }
   }
   void w() {
