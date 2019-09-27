@@ -35,8 +35,6 @@ void keyPressed() {
     main.d();
   }
 }
-
-
 void mouseClicked() {
   balls.add(new Ball());
 }

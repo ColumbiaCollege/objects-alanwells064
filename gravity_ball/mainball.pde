@@ -1,9 +1,9 @@
 class Mainball {
   //properties
   float xpos;
-  int ypos;
+  float ypos;
   float xaccel = 200;
-  int yaccel = 0;
+  float yaccel = 0;
   //define speed variable
   float speed = 0;
   //define number of collisions variable
@@ -12,7 +12,7 @@ class Mainball {
   int c = 0;
   //variables for switching velocities when balls collide
   float tempx;
-  int tempy;
+  float tempy;
   //constructor
   Mainball() {
     xpos = 100;
@@ -34,13 +34,13 @@ class Mainball {
   void collide() {
     //test for and apply wall collisions by inverting acceleration and changing random ball color
     if (xpos>775) {
-      xaccel = xaccel*(-1);
+      xaccel = xaccel*(-1)+1;
       xpos = 775;
       collisions++;
       c = int(random(0, 256));
     }
     if (xpos<25) {
-      xaccel = xaccel*(-1);
+      xaccel = xaccel*(-1)-1;
       xpos = 25;
       collisions++;
       c = int(random(0, 256));
@@ -49,7 +49,7 @@ class Mainball {
       xaccel = 0;
     }
     if (ypos>775) {
-      yaccel = yaccel*(-1)+3;
+      yaccel = yaccel*(-1)+5;
       ypos = 775;
       if (yaccel<1) {
         collisions++;
@@ -70,10 +70,10 @@ class Mainball {
         tempy = ball.yaccel;
         ball.yaccel = yaccel;
         yaccel = tempy;
-        xpos = xpos + 0.5*(xpos-ball.xpos);
-        ball.xpos = ball.xpos + (ball.xpos-xpos);
-        ypos = ypos + int(0.5*(ypos-ball.ypos));
-        ball.ypos = ball.ypos + (ball.ypos-ypos);
+        xaccel = xaccel + 0.1*(xpos-ball.xpos);
+        ball.xaccel = ball.xaccel + 0.1*(ball.xpos-xpos);
+        yaccel = yaccel + 0.1*(ypos-ball.ypos);
+        ball.yaccel = ball.yaccel + 0.1*(ball.ypos-ypos);
       }
     }
   }

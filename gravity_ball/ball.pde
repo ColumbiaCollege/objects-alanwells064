@@ -1,12 +1,12 @@
 class Ball {
   //properties
   float xpos;
-  int ypos;
+  float ypos;
   float xaccel = 0;
-  int yaccel = -10;
+  float yaccel = -10;
   //variables for switching variables when balls collide
   float tempx;
-  int tempy;
+  float tempy;
   //constructor
   Ball() {
     xpos = mouseX;
@@ -28,18 +28,18 @@ class Ball {
   void collide() {
     //test for and apply wall collisions by inverting acceleration and changing random ball color
     if (xpos>775) {
-      xaccel = xaccel*(-1);
+      xaccel = xaccel*(-1)+1;
       xpos = 775;
     }
     if (xpos<25) {
-      xaccel = xaccel*(-1);
+      xaccel = xaccel*(-1)-1;
       xpos = 25;
     }
     if (abs(xaccel)<0.1) {
       xaccel = 0;
     }
     if (ypos>775) {
-      yaccel = yaccel*(-1)+3;
+      yaccel = yaccel*(-1)+5;
       ypos = 775;
       if (yaccel<1) {
       }
@@ -56,10 +56,10 @@ class Ball {
         tempy = ball.yaccel;
         ball.yaccel = yaccel;
         yaccel = tempy;
-        xpos = xpos + 0.5*(xpos-ball.xpos);
-        ball.xpos = ball.xpos + (ball.xpos-xpos);
-        ypos = ypos + int(0.5*(ypos-ball.ypos));
-        ball.ypos = ball.ypos + (ball.ypos-ypos);
+        xaccel = xaccel + 0.1*(xpos-ball.xpos);
+        ball.xaccel = ball.xaccel + 0.1*(ball.xpos-xpos);
+        yaccel = yaccel + 0.1*(ypos-ball.ypos);
+        ball.yaccel = ball.yaccel + 0.1*(ball.ypos-ypos);
       }
     }
   }
