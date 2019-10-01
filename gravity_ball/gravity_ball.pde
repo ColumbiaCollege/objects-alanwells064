@@ -1,4 +1,6 @@
+//creates a new mainball called main (controllable)
 Mainball main = new Mainball();
+//intialize arraylist called balls based on Ball
 ArrayList<Ball> balls = new ArrayList<Ball>();
 //set canvas size, text size, & color mode
 void setup() {
@@ -9,9 +11,11 @@ void setup() {
 void draw() {
   //draw background every frame
   background(#88DE7D);
+  //mainball move, collide, & display
   main.move();
   main.collide();
   main.display();
+  //move, collide, & display every ball (based on Ball) in the arraylist balls
   for (Ball ball : balls) {
     ball.move();
     ball.collide();
@@ -35,6 +39,7 @@ void keyPressed() {
     main.d();
   }
 }
+//adds a new ball object (based on Ball) to the array list called balls
 void mouseClicked() {
   balls.add(new Ball());
 }
